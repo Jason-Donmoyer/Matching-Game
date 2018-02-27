@@ -2,7 +2,23 @@
  * Create a list that holds all of your cards
  */
 
-$timer = $('.time');
+ let symbols = [
+ 				'diamond', 'diamond',
+ 				'paperPlane', 'paperPlane',
+ 				'anchor', 'anchor',
+ 				'bolt', 'bolt',
+ 				'cube', 'cube',
+ 				'leaf', 'leaf',
+ 				'bicycle', 'bicycle',
+ 				'bomb', 'bomb'
+ 				];
+
+const moves = 0;
+const posMatch = 0;
+
+const gameStarted = false;
+
+const $timer = $('.time');
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below

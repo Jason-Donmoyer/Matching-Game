@@ -2,26 +2,7 @@
  * Create a list that holds all of your cards
  */
 
- let cardNames = [
- 				'diamond', 'diamond',
- 				'paperPlane', 'paperPlane',
- 				'anchor', 'anchor',
- 				'bolt', 'bolt',
- 				'cube', 'cube',
- 				'leaf', 'leaf',
- 				'bicycle', 'bicycle',
- 				'bomb', 'bomb'
- 				];
 
-const turns = 0;
-const posMatch = 0;
-const $cardDeck = $('.deck');
-const $numOfMoves = $('.moves');
-const $stars = $('.fa-star');
-
-const gameStarted = false;
-
-const $timer = $('.time');
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -44,18 +25,6 @@ function shuffle(array) {
     return array;
 }
 
-function startGame() {
-	const cards = shuffle(cardNames);
-	$cardDeck.empty();
-	posMatch = 0;
-	turns = 0;
-	$numOfMoves.text('0');
-	$stars.removeClass('fa-star-o').addClass('fa-star');
-	for (let i = 0; i < cards.length; i++) {
-		$cardDeck.append($('<li class="card"><i class="fa fa-' + cards[i] + '></i></li>'));
-	}
-
-}
 
 /*
  * set up the event listener for a card. If a card is clicked:

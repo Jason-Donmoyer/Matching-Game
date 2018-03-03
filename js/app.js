@@ -2,6 +2,75 @@
  * Create a list that holds all of your cards
  */
 
+// Selects the ul element to append cards to 
+let deck = document.querySelector(".deck");
+
+
+// game size variables
+let gameWidth = 4;
+let gameHeight = 4;
+
+// match variables
+let firstCard = null;
+let secondCard = null;
+let checkTimeout = null;
+let matches = 0;
+
+// creates the card array
+let cardArray = [
+				"fa-diamond",
+				"fa-paper-plane-o",
+				"fa-anchor",
+				"fa-bolt",
+				"fa-cube",
+				"fa-leaf",
+				"fa-bicycle",
+				"fa-bomb",
+				"fa-diamond",
+				"fa-paper-plane-o",
+				"fa-anchor",
+				"fa-bolt",
+				"fa-cube",
+				"fa-leaf",
+				"fa-bicycle",
+				"fa-bomb"
+				];
+
+
+function getCards(array) {
+	let shuffledArray = shuffle(array);
+	let cards = [];
+
+	for (let i = 0; i < shuffledArray.length; i++) {
+		
+		let card = document.createElement('li');
+		card.classList.add('card');
+		let item = document.createElement('i');
+		item.classList.add('fa')
+		item.classList.add(shuffledArray[i]);
+		card.appendChild(item);
+		cards.push(card);
+	}
+
+	return cards;
+		
+}
+
+function dealCards(array) {
+	newDeck = getCards(array);
+
+	for (i = 0; i < newDeck.length; i++) {
+		deck.appendChild(newDeck[i]);
+	}
+}
+// function createCard(array, posX, posY) {
+// 	let card = document.createElement('li');
+// 	card.classList.add('card');
+// 	let item = document.createElement('i');
+// 	item.classList.add('fa' + shuffledArray[i]);
+// 	card.appendChild(item);
+// 	deck.appendChild(card);
+// }
 
 /*
  * Display the cards on the page
@@ -25,6 +94,7 @@ function shuffle(array) {
     return array;
 }
 
+dealCards(cardArray);
 
 /*
  * set up the event listener for a card. If a card is clicked:

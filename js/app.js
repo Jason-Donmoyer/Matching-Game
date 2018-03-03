@@ -50,11 +50,48 @@ function getCards(array) {
 		item.classList.add(shuffledArray[i]);
 		card.appendChild(item);
 		cards.push(card);
+
+		card.addEventListener('click', (e) => {
+			let card = e.target;
+			//alert("you clicked card number" + [i]);
+			card.setAttribute('class', 'card show');
+			card.setAttribute('style', '::before');
+			
+
+			if (firstCard === null) {
+				firstCard = card;
+			} else if (firstCard === card) {
+				firstCard = null;
+			} else if (secondCard === null) {
+				secondCard = card;
+				
+
+				//checkMatch();
+			}
+		});
 	}
 
 	return cards;
 		
 }
+
+// function checkMatch() {
+// 	if (firstCard.firstElementChild.classList === secondCard.firstElementChild.classList) {
+// 		firstCard.removeAttribute('class');
+// 		secondCard.removeAttribute('class');
+// 		firstCard.setAttribute('class', 'card match');
+// 		secondCard.setAttribute('class', 'card match');
+// 	} else {
+// 		firstCard.removeAttribute('class');
+// 		secondCard.removeAttribute('class');
+// 		firstCard.setAttribute('class', 'card');
+// 		secondCard.setAttribute('class', 'card');
+// 	}
+
+// 	firstCard = null;
+// 	secondCard = null;
+// 	checkTimeout = null;
+// }
 
 function dealCards(array) {
 	newDeck = getCards(array);

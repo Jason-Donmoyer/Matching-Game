@@ -9,12 +9,19 @@ let deck = document.querySelector(".deck");
 // game size variables
 let gameWidth = 4;
 let gameHeight = 4;
+let timer = {
+	seconds: 0,
+	minutes: 0,
+	clearTimer: -1
+};
 
 // match variables
 let firstCard = null;
 let secondCard = null;
 let checkTimeout = null;
+let displayedCards = [];
 let matches = 0;
+
 
 // creates the card array
 let cardArray = [
@@ -36,6 +43,36 @@ let cardArray = [
 				"fa-bomb"
 				];
 
+// Timer functions to set and reset the timer
+let setTimer = function() {
+	if (timer.seconds === 59) {
+		timer.minutes++;
+		timer.secods = 0;
+	} else {
+		timer.seconds++;
+	}
+	// sets single digit seconds to two character length
+	// let secondFormatter = "0";
+	// if (timer.seconds < 10) {
+	// 	secondFormatter += timer.seconds;
+	// } else {
+	// 	secondFormatter = String(timer.seconds);
+	// }
+
+	let time = String(timer.minutes) + ":" + String(timer.seconds);
+	$('.timer').text(time);
+};
+
+// reset timer function
+function resetTime() {
+	clearInterval(timer.clearTimer);
+	timer.seconds = 0;
+	timer.minutes = 0;
+	$('.timer').text("0:00");
+
+	timer.clearTimer = setInterval(setTimer, 1000);
+}
+
 
 function getCards(array) {
 	let shuffledArray = shuffle(array);
@@ -54,14 +91,20 @@ function getCards(array) {
 		card.addEventListener('click', (e) => {
 			let card = e.target;
 			//alert("you clicked card number" + [i]);
+			
+			setTimeout(flipCard(card), 1000);
 			card.setAttribute('class', 'card show');
-			card.setAttribute('style', '::before');
+			//card.firstElementChild.setAttribute('style', '::after');
 			
 
 			if (firstCard === null) {
 				firstCard = card;
+
 			} else if (firstCard === card) {
 				firstCard = null;
+				card.classList.remove('show');
+				
+				//firstCard.firstElementChild.removeAttribute('style');
 			} else if (secondCard === null) {
 				secondCard = card;
 				
@@ -76,7 +119,7 @@ function getCards(array) {
 }
 
 // function checkMatch() {
-// 	if (firstCard.firstElementChild.classList === secondCard.firstElementChild.classList) {
+// 	if (firstCard.firstChild.className === secondCard.firstChild.className) {
 // 		firstCard.removeAttribute('class');
 // 		secondCard.removeAttribute('class');
 // 		firstCard.setAttribute('class', 'card match');
@@ -93,6 +136,10 @@ function getCards(array) {
 // 	checkTimeout = null;
 // }
 
+function flipCard(card) {
+	card.setAttribute('class', 'card open');
+}
+	
 function dealCards(array) {
 	newDeck = getCards(array);
 
